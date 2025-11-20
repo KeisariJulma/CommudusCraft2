@@ -1,0 +1,15 @@
+[package]
+name = "CommudusCraft"
+version = "0.1.0"
+edition = "2024"
+
+
+
+
+[dependencies]
+bevy = {version = "0.17.2", features = ["dynamic_linking"]}
+serde = { version = "1.0.228", features = ["derive"] }
+toml = "0.9.8"
+wgpu-types = "26.0.0"
+futures-lite = "2.6.1"
+rand = "0.9.2"
