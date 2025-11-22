@@ -1,15 +1,15 @@
 use bevy::prelude::*;
-use crate::world::chunk::{update_chunks, ChunkLoadQueue, LoadedChunks};
+use crate::WorldSeed;use super::chunk_manager::{ChunkManager, update_chunks, poll_chunk_tasks,};
 
 pub struct ChunkPlugin;
 
 impl Plugin for ChunkPlugin {
     fn build(&self, app: &mut App) {
-        // Insert resources first
-        app.insert_resource(LoadedChunks::default());
-        app.insert_resource(ChunkLoadQueue::default());
-
-        // Then add the system
-        app.add_systems(Update, update_chunks);
+        // Insert the ChunkManager resource
+        app.insert_resource(ChunkManager::default())
+            // System to update which chunks are loaded/despawned
+            .add_systems(Update, update_chunks)
+            // System to poll finished async tasks and update chunk entities
+            .add_systems(Update, poll_chunk_tasks);
     }
 }

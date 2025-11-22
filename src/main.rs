@@ -3,9 +3,10 @@ mod utils;
 use bevy::prelude::*;
 use bevy::window::{ExitCondition, PresentMode, WindowMode};
 use crate::world::ChunkPlugin::ChunkPlugin;
-use crate::utils::light::LightPluginSource;
+use crate::utils::light::LightPlugin;
 use crate::utils::camera::SimpleCameraPlugin;
 use crate::world::seed::WorldSeed;
+
 
 fn main() {
     let mut app = App::new();
@@ -33,9 +34,12 @@ fn main() {
             }),
     );
     app.insert_resource(WorldSeed::default());
+
     app.add_plugins(ChunkPlugin);
-    app.add_plugins(LightPluginSource);
+    app.add_plugins(LightPlugin);
     app.add_plugins(SimpleCameraPlugin);
 
     app.run();
 }
+
+
